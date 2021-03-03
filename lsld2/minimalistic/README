@@ -1,0 +1,8 @@
+Random notes:
+merge fbasis and pcheck, make this the main file
+from this merged fbasis, call matrxd and matrxo
+spit out the parameters to Python (remember multi-output tuples are all good) :)
+
+Instructions:
+python3 setup.py to run the installation and perform a test on the generated matrices
+

@@ -1,0 +1,41 @@
+log 2dELDORrun
+spectra 1
+components 1
+let b0=34050
+let gxx,gyy,gzz = 2.0087, 2.0057, 2.0021
+let in2,axx,ayy,azz = 2, 6, 10, 36
+let Rprp,Rpll=5.6990,6
+c let Rprp,Rpll=8.7,9
+let ald,bed,gad= 10.0,15.0,20.0
+let alm,bem,gam= 25.0,30.0,35.0
+let nort=1
+let psi=10.0
+let c20=1.0
+let c22=0.5
+c let lemx,lomx,kmx,mmx,ipnmx=56,41,28,28,2
+c let lemx,lomx,kmx,mmx,ipnmx=20,15,6,6,2
+let lemx,lomx,kmx,mmx,ipnmx=12,9,4,4,2
+c let lemx,lomx,kmx,mmx,ipnmx=8,5,2,2,2
+c let lemx,lomx,kmx,mmx,ipnmx=4,3,2,2,2
+let ipdf=0
+let ist=0
+basis
+let nstep,cgtol=1500,1e-6
+series iexp=3
+c 2dELDOR
+series icomb=-1
+series npt1=128
+c doesn't matter
+series npt2=128
+c doesn't matter
+series init1=0
+series init2=0
+series stept1=1
+c doesn't matter
+series stept2=1
+c doesn't matter
+series tfix=350
+c garbage tfix, as this nlspmc only generates matrices
+series weight=1
+parms
+fit
