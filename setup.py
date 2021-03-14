@@ -1,9 +1,10 @@
 from setuptools import setup
 
 setup(name='lsld2',
-      version='0.1',
+      version='0.0.4',
       description='TODO',
-      long_description='TODO.',
+      long_description="Preliminary package structure for a simulation "
+      "fitting tool",
       classifiers=[
           'Development Status :: 2 - Pre-Alpha',
           # 'License :: OSI Approved :: MIT License', # TODO: License
