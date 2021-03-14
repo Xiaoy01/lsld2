@@ -5,3 +5,7 @@ matrx_imag.mtxx
 matrx_imag.mtxz
 matrx_real.mtxx
 matrx_real.mtxz
+
+/dist
+/build
+*.egg-info
