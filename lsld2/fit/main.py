@@ -5,7 +5,7 @@ import sys
 from lmfit import minimize, report_fit, Parameters
 import numpy as np
 
-import saturation_calc
+from .saturation_calc import sat_residual
 
 # Lists of fitting algorithms, separated by whether they are custom
 # implementations or wrappers of lmfit functions
@@ -19,7 +19,7 @@ def fit_sat(params_fit=Parameters(),
             spec_expt=np.zeros((1, 128)), b1_list=[0.1], weights=[1],
             algo_choice="simplex", **fit_kws):
     """
-    Minimize the [saturation_calc.sat_residual()] function using the specified
+    Minimize the [sat_residual()] function using the specified
     arguments and algorithm.
 
     Calls on the [fit()] function to do so.
@@ -68,20 +68,20 @@ def fit_sat(params_fit=Parameters(),
 
 def sat_residual_wrapper(params, **kws):
     """
-    [saturation_calc.sat_residual()] restructured to conform with constraints
+    [sat_residual()] restructured to conform with constraints
     of [lmfit] residual functions.
 
-    See [saturation_calc.sat_residual()] for full documentation of arguments.
+    See [sat_residual()] for full documentation of arguments.
 
     Args:
         params (lmfit.Parameters): all bindings that would be stored in
-            [params_fit] for [saturation_calc.sat_residual()]
+            [params_fit] for [sat_residual()]
         **kws (dict, optional): all bindings that would be stored in
-            [params_nonfit] for [saturation_calc.sat_residual()], as well as
-            all other optional arguments of [saturation_calc.sat_residual()].
+            [params_nonfit] for [sat_residual()], as well as
+            all other optional arguments of [sat_residual()].
 
     Returns:
-        Residual values computed by [saturation_calc.sat_residual()].
+        Residual values computed by [sat_residual()].
     Return type:
         [numpy.ndarray]
     """
@@ -93,12 +93,12 @@ def sat_residual_wrapper(params, **kws):
     weights = params_nonfit.pop("weights")
 
     # Get output
-    return saturation_calc.sat_residual(params_fit=params_fit,
-                                        params_nonfit=params_nonfit,
-                                        bgrid=bgrid,
-                                        spec_expt=spec_expt,
-                                        b1_list=b1_list,
-                                        weights=weights)
+    return sat_residual(params_fit=params_fit,
+                        params_nonfit=params_nonfit,
+                        bgrid=bgrid,
+                        spec_expt=spec_expt,
+                        b1_list=b1_list,
+                        weights=weights)
 
 
 def dummy_sat_residual_wrapper(params, **kws):

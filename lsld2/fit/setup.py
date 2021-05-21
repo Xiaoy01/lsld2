@@ -1,4 +1,4 @@
-import mat  # the Fortran90 wrapped module just generated, mat.generate_matrices is a F90 subroutine that can be called in Python
+from . import mat  # the Fortran90 wrapped module just generated, mat.generate_matrices is a F90 subroutine that can be called in Python
 import os
 import numpy as np
 from scipy.sparse import csr_matrix, spdiags, coo_matrix
