@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='lsld2',
-      version='0.0.4',
+      version='0.0.5',
       description='TODO',
       long_description="Preliminary package structure for a simulation "
       "fitting tool",

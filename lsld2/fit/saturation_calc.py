@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from setup import *
+from .setup import *
 from scipy.ndimage import gaussian_filter1d
 from scipy.sparse import block_diag, identity, bmat, diags, spdiags
 from scipy.sparse.linalg import gmres, spsolve
@@ -12,7 +12,7 @@ from math import ceil
 import copy
 import numpy as np
 import matplotlib.pyplot as plt
-import gconvl
+from . import gconvl
 
 
 def cw_spec(bgrid=np.linspace(-60, 60, 128)+3360, params_in=dict(), basis_file='xoxo', prune_on=0):
