@@ -8,6 +8,7 @@ import sys
 import numpy as np
 from lmfit import Parameters
 
+
 from main import fit, fit_sat, dummy_sat_residual_wrapper
 
 
