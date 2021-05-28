@@ -21,11 +21,13 @@ f.close()
 # install the "mat" package from the Fortran90 files listed below using the Numpy f2py wrapper; this is Windows version!!!!
 # see "quick and smart way" at https://numpy.org/doc/stable/f2py/f2py.getting-started.html#the-quick-and-smart-way
 # ignore the warnings generated during numpy.f2py; have a lot of unused variables; don't know why the "uninitialized-maybe" warnings come
-print('No need to compile the Fortran code again and again, go to setup.py and comment the f2py line to avoid wasting time every compilation')
 # compile the mat module
-if not os.path.exists("mat.cpython-36m-darwin.so"):
+mat_path = "mat.cpython-36m-darwin.so"
+gconvl_path = "gconvl.cpython-36m-darwin.so"
+
+if not (os.path.exists(mat_path) or os.path.exists("fit/" + mat_path)):
     os.system('f2py -c -m mat  generate_matrices.f90 stveco.f90 anxlk.f90 matrxd.f90 matrxo.f90 cd2km.f90 fz.f90 ccrint_new.f90 bessel.f90 ipar.f90 plgndr.f90 w3j.f90')
-if not os.path.exists("gconvl.cpython-36m-darwin.so"):
+if not (os.path.exists(gconvl_path) or os.path.exists("fit/" + gconvl_path)):
     os.system('f2py -c -m gconvl  gconvl.f')  # compile the gconvl Gaussian convolution module
 
 # definitions of parameters as per their positions in the arrays fed to Fortran
