@@ -5,7 +5,7 @@ import sys
 from lmfit import minimize, report_fit, Parameters
 import numpy as np
 
-from .saturation_calc import sat_residual
+from .saturation_calc import cw_spec, sat_residual
 
 # Lists of fitting algorithms, separated by whether they are custom
 # implementations or wrappers of lmfit functions
@@ -119,20 +119,18 @@ def dummy_sat_residual_wrapper(params, **kws):
     """
     bgrid = np.linspace(-60, 60, 256) + 3360
     # Construct fake data
-    spec_expt = saturation_calc.cw_spec(bgrid=bgrid,
-                                        params_in={**kws, **{'scale': 1.0,
-                                                             'dx': 7.2,
-                                                             'dy': 7.2,
-                                                             'dz': 8}},
-                                        basis_file='xoxo', prune_on=0)[1]
+    spec_expt = cw_spec(bgrid=bgrid, params_in={**kws, **{'scale': 1.0,
+                                                          'dx': 7.2,
+                                                          'dy': 7.2,
+                                                          'dz': 8}},
+                        basis_file='xoxo', prune_on=0)[1]
     # Construct the same model as [sat_residual_wrapper()], but with simple
     # arguments
-    spec_simulated = saturation_calc.cw_spec(bgrid=bgrid,
-                                             params_in={**kws,
-                                                        **{x: params[x].value
-                                                           for x in params}},
-                                             basis_file='xoxo',
-                                             prune_on=False)[1]
+    spec_simulated = cw_spec(bgrid=bgrid, params_in={**kws,
+                                                     **{x: params[x].value
+                                                        for x in params}},
+                             basis_file='xoxo',
+                             prune_on=False)[1]
     # Return residual value
     return spec_expt - spec_simulated
 
@@ -209,9 +207,9 @@ def __lmfit_fit(residual_function, params, algo_choice, args=None, kws=None,
     # Return to original output channel
     sys.stdout = old_stdout
     # Print report of fitting results
-    print(report_fit(out.params))
+    report_fit(out.params)
     # Return value bindings
-    return out
+    return out.params
 
 
 def __custom_fit(residual_function, params, algo_choice, args=None, kws=None,
